@@ -1,5 +1,27 @@
+header {
+  height: 65px;
+}
+
 .App {
   text-align: center;
+  height: 100vh;
+}
+
+.App-body {
+  display: flex;
+  justify-content: center;
+  padding: 0 80px;
+  height: calc(100% - 65px);
+  align-items: center;
+}
+
+.Megashop {
+  margin: 20px;
+}
+
+.Centered {
+  display: flex;
+  justify-content: center;
 }
 
 .App-logo {
