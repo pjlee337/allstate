@@ -22,9 +22,41 @@ a { text-decoration: none; }
   height: calc(100% - 65px);
   align-items: center;
 }
+.space-between {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.col-1 {
+  width: 500px;
+  display: flex;
+  justify-content: flex-start;
+  white-space: nowrap;
+}
+.values {
+  margin-right: 15px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ml-15 {
+  margin-right: 15px!important;
+}
+.update-button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
 
 .Megashop {
   margin: 20px;
+}
+
+.greeting-containers {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
 .Centered {
