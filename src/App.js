@@ -6,6 +6,14 @@ import './App.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import logo from './logo.svg';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+
 
 function App() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -21,6 +29,27 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <AppBar position="static">
+        <Toolbar>
+          <div className='App-logo-container'>
+            <IconButton
+              size="large"
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <img src={logo} className="App-logo" alt="logo" />
+            </Typography>
+          </div>
+          <div className='login-button-container' >
+            <Button color="inherit">Login</Button>
+          </div>
+        </Toolbar>
+      </AppBar>
       <Routes>
         <Route path="/" element={<Selector />} />
         <Route path="/config" element={<Configurator />} />

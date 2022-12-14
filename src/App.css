@@ -2,6 +2,8 @@ header {
   height: 65px;
 }
 
+a { text-decoration: none; }
+
 .App {
   text-align: center;
   height: 100vh;
