@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, Link } from "react-router-dom"
 import Selector from './Selector.js';
 import Configurator from './Configurator.js';
 import './App.css';
@@ -42,7 +42,7 @@ function App() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <img src={logo} className="App-logo" alt="logo" />
+              <Link to="/"><img src={logo} className="App-logo" alt="logo" /></Link>
             </Typography>
           </div>
           <div className='login-button-container' >
