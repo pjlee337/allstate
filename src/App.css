@@ -4,6 +4,12 @@ header {
 
 a { text-decoration: none; }
 
+.Accordion-container {
+  width: 75%;
+  margin: auto;
+  padding-top: 100px;
+}
+
 .App {
   text-align: center;
   height: 100vh;
