@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, Link } from "react-router-dom"
+import { Route, Routes, Link } from "react-router-dom";
 import Selector from './Selector.js';
 import Configurator from './Configurator.js';
 import './App.css';
@@ -13,9 +13,15 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { Amplify } from 'aws-amplify';
 
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
 
-function App() {
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
+
+function App({ signOut, user }) {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const theme = React.useMemo(
     () =>
@@ -46,7 +52,7 @@ function App() {
             </Typography>
           </div>
           <div className='login-button-container' >
-            <Button color="inherit">Login</Button>
+            <Button color="inherit" onClick={signOut}>Logout</Button>
           </div>
         </Toolbar>
       </AppBar>
@@ -58,4 +64,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthenticator(App);
