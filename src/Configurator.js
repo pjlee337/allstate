@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -10,7 +11,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
@@ -82,6 +82,16 @@ function Configurator() {
   const handleCloseChange = (event) => {
     setClose(event.target.value);
   };
+  const [checked, setGreetingChecked, setEmergencyChecked] = useState(false);
+  const onGreetingClick = (event) => {
+    event.stopPropagation();
+    setGreetingChecked(event.target.checked);
+  }
+  const onEmergencyClick = (event) => {
+    event.stopPropagation();
+    setEmergencyChecked(event.target.checked);
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -207,7 +217,7 @@ function Configurator() {
                 <div className='values'>
                   <FormGroup>
                     <Stack direction="row" spacing={1} alignItems="center">
-                      <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />
+                      <AntSwitch inputProps={{ 'aria-label': 'ant design' }} greetingChecked={checked} onClick={onGreetingClick} />
                     </Stack>
                   </FormGroup>
                 </div>
@@ -261,7 +271,7 @@ function Configurator() {
                 <div className='values'>
                   <FormGroup>
                     <Stack direction="row" spacing={1} alignItems="center">
-                      <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />
+                      <AntSwitch inputProps={{ 'aria-label': 'ant design' }} emergencyChecked={checked} onClick={onEmergencyClick} />
                     </Stack>
                   </FormGroup>
                 </div>
@@ -296,7 +306,7 @@ function Configurator() {
         </Accordion>
 
         {/* Alternate Routing */}
-        <Accordion expanded={expanded === 'panel7'} onChange={handleChange('panel7')}>
+        {/* <Accordion expanded={expanded === 'panel7'} onChange={handleChange('panel7')}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1bh-content"
@@ -321,7 +331,7 @@ function Configurator() {
               Aliquam eget maximus est, id dignissim quam.
             </Typography>
           </AccordionDetails>
-        </Accordion>
+        </Accordion> */}
 
 
       </div>
