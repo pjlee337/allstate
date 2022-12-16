@@ -1,0 +1,10 @@
+{
+  "resourceName": "dynamo566caf1f",
+  "tableName": "dynamo566caf1f",
+  "partitionKey": {
+    "fieldName": "vendorcode",
+    "fieldType": "string"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

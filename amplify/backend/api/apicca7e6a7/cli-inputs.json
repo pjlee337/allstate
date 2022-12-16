@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/items": {
+      "name": "/items",
+      "lambdaFunction": "allstateb7b5c16c",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}
