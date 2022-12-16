@@ -48,6 +48,9 @@ a { text-decoration: none; }
   flex-wrap: wrap;
   justify-content: flex-end;
 }
+.update-container {
+  text-align: right;
+}
 
 .Megashop {
   margin: 20px;

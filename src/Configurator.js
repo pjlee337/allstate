@@ -16,6 +16,7 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { Input } from '@mui/material';
 
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
@@ -71,8 +72,8 @@ function Configurator() {
     [prefersDarkMode],
   );
   const [expanded, setExpanded] = React.useState(false);
-  const [openGreet, setOpen] = React.useState('Enter your change');
-  const [closeGreet, setClose] = React.useState('Enter your change');
+  const [openGreet, setOpen] = React.useState('');
+  const [closeGreet, setClose] = React.useState('');
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
@@ -116,10 +117,27 @@ function Configurator() {
             </div>
         </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-              Aliquam eget maximus est, id dignissim quam.
-            </Typography>
+            <div className='update-container'>
+              <Box
+                component="form"
+                sx={{
+                  '& .MuiTextField-root': { m: 0, width: '100%' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="outlined-multiline-flexible"
+                  label="Vendor Code"
+                  multiline
+                  maxRows={4}
+                />
+              </Box>
+
+              <br />
+              <Button size="small" variant="contained">Update</Button>
+
+            </div>
           </AccordionDetails>
         </Accordion>
 
@@ -143,11 +161,27 @@ function Configurator() {
             </div>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-              Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus,
-              varius pulvinar diam eros in elit. Pellentesque convallis laoreet
-              laoreet.
-            </Typography>
+            <div className='update-container'>
+              <Box
+                component="form"
+                sx={{
+                  '& .MuiTextField-root': { m: 0, width: '100%' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="outlined-multiline-flexible"
+                  label="Branch Type"
+                  multiline
+                  maxRows={4}
+                />
+              </Box>
+
+              <br />
+              <Button size="small" variant="contained">Update</Button>
+
+            </div>
           </AccordionDetails>
         </Accordion>
 
@@ -171,10 +205,27 @@ function Configurator() {
             </div>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-              Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
-              amet egestas eros, vitae egestas augue. Duis vel est augue.
-            </Typography>
+            <div className='update-container'>
+              <Box
+                component="form"
+                sx={{
+                  '& .MuiTextField-root': { m: 0, width: '100%' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="outlined-multiline-flexible"
+                  label="DNIS - Connected"
+                  multiline
+                  maxRows={4}
+                />
+              </Box>
+
+              <br />
+              <Button size="small" variant="contained">Update</Button>
+
+            </div>
           </AccordionDetails>
         </Accordion>
 
@@ -198,10 +249,27 @@ function Configurator() {
             </div>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-              Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer sit
-              amet egestas eros, vitae egestas augue. Duis vel est augue.
-            </Typography>
+            <div className='update-container'>
+              <Box
+                component="form"
+                sx={{
+                  '& .MuiTextField-root': { m: 0, width: '100%' },
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <TextField
+                  id="outlined-multiline-flexible"
+                  label="Address"
+                  multiline
+                  maxRows={4}
+                />
+              </Box>
+
+              <br />
+              <Button size="small" variant="contained">Update</Button>
+
+            </div>
           </AccordionDetails>
         </Accordion>
 
@@ -221,8 +289,9 @@ function Configurator() {
                     </Stack>
                   </FormGroup>
                 </div>
+                <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Open / Close Override</Typography>
               </div>
-              <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Open / Close Override</Typography>
+              <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Greeting</Typography>
             </div>
           </AccordionSummary>
           <AccordionDetails>
@@ -248,7 +317,6 @@ function Configurator() {
                   id="outlined-uncontrolled"
                   label="Close Greeting"
                   value={closeGreet}
-                  defaultValue="foo"
                   onChange={handleCloseChange}
                   multiline
                   rows={4}
@@ -275,6 +343,7 @@ function Configurator() {
                     </Stack>
                   </FormGroup>
                 </div>
+                <Typography className="ml-15" sx={{ color: 'text.secondary' }}>On / Off Emergency Greeting</Typography>
               </div>
               <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Emergency Greeting</Typography>
             </div>
@@ -285,7 +354,7 @@ function Configurator() {
                 className="space-between"
                 component="form"
                 sx={{
-                  '& > :not(style)': { mb: 3, width: '49%' },
+                  '& > :not(style)': { mb: 3, width: '100%' },
                 }}
                 noValidate
                 autoComplete="off"
@@ -294,7 +363,6 @@ function Configurator() {
                   id="outlined-uncontrolled"
                   label="Emergency Greeting"
                   value={closeGreet}
-                  defaultValue="foo"
                   onChange={handleCloseChange}
                   multiline
                   rows={4}
