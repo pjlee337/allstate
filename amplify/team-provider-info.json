@@ -9,7 +9,8 @@
       "UnauthRoleName": "amplify-amplifyf9947eec9bbc4-staging-200248-unauthRole",
       "StackName": "amplify-amplifyf9947eec9bbc4-staging-200248",
       "StackId": "arn:aws:cloudformation:us-east-1:139701943265:stack/amplify-amplifyf9947eec9bbc4-staging-200248/48c076d0-7bea-11ed-a746-0a3167c64b41",
-      "AmplifyAppId": "d1tgrv1qa96qhm"
+      "AmplifyAppId": "d1tgrv1qa96qhm",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-amplifyf9947eec9bbc4-staging-200248-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
     },
     "categories": {
       "auth": {

@@ -7,6 +7,19 @@
       "permissions": {
         "setting": "open"
       }
+    },
+    "/data": {
+      "name": "/data",
+      "lambdaFunction": "allstateb7b5c16c",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
     }
   }
 }

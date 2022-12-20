@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from "react-router-dom"
 import hands from './hands.svg';
 import './App.css';
@@ -11,6 +11,10 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { API } from 'aws-amplify';
+import aws_exports from './aws-exports';
+
+API.configure(aws_exports);
 
 function Selector() {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -23,6 +27,21 @@ function Selector() {
       }),
     [prefersDarkMode],
   );
+  const apiName = 'apicca7e6a7';
+  const path = '/data/';
+  const myInit = {
+    headers: {}, // OPTIONAL
+    response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
+  };
+
+  API.get(apiName, path, myInit)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error.response);
+    });
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -47,7 +66,7 @@ function Selector() {
               </Typography>
             </CardContent>
             <CardActions className="Centered">
-              <Link to="/config"><Button size="small">Select</Button></Link>
+              <Link to="/config" state={{ id: 1 }}><Button size="small">Select</Button></Link>
             </CardActions>
           </Card>
 
@@ -70,7 +89,7 @@ function Selector() {
               </Typography>
             </CardContent>
             <CardActions className="Centered">
-              <Link to="/config"><Button size="small">Select</Button></Link>
+              <Link to="/config" state={{ id:2 }}><Button size="small">Select</Button></Link>
             </CardActions>
           </Card>
 
@@ -93,7 +112,7 @@ function Selector() {
               </Typography>
             </CardContent>
             <CardActions className="Centered">
-              <Link to="/config"><Button size="small">Select</Button></Link>
+              <Link to="/config" state={{ id: 3 }}><Button size="small">Select</Button></Link>
             </CardActions>
           </Card>
         </Box>

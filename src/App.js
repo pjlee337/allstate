@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Routes, Link } from "react-router-dom";
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
 import Selector from './Selector.js';
 import Configurator from './Configurator.js';
 import './App.css';
@@ -14,12 +16,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Amplify } from 'aws-amplify';
+import awsconfig from './aws-exports';
 
-import { withAuthenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
-
-import awsExports from './aws-exports';
-Amplify.configure(awsExports);
+Amplify.configure(awsconfig);
 
 function App({ signOut, user }) {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -32,6 +31,7 @@ function App({ signOut, user }) {
       }),
     [prefersDarkMode],
   );
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
