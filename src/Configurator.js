@@ -289,7 +289,7 @@ function Configurator() {
                     </Stack>
                   </FormGroup>
                 </div>
-                <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Open / Close Override</Typography>
+                <Typography className="col-1" sx={{ width: '33%', flexShrink: 0 }}>Open / Close Override</Typography>
               </div>
               <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Greeting</Typography>
             </div>
@@ -343,7 +343,7 @@ function Configurator() {
                     </Stack>
                   </FormGroup>
                 </div>
-                <Typography className="ml-15" sx={{ color: 'text.secondary' }}>On / Off Emergency Greeting</Typography>
+                <Typography className="col-1" sx={{ width: '33%', flexShrink: 0 }}>>On / Off Emergency Greeting</Typography>
               </div>
               <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Emergency Greeting</Typography>
             </div>
