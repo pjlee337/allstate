@@ -28,19 +28,21 @@ function Selector() {
     [prefersDarkMode],
   );
   const apiName = 'apicca7e6a7';
-  const path = '/data';
+  const path = '/data/vendorcode';
   const myInit = {
     headers: {}, // OPTIONAL
     response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
   };
+  useEffect((response) => {
+    API.get(apiName, path, myInit)
+      .then((response) => {
+        console.log(response);
 
-  API.get(apiName, path, myInit)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error.response);
-    });
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  })
 
   return (
     <ThemeProvider theme={theme}>
@@ -66,7 +68,7 @@ function Selector() {
               </Typography>
             </CardContent>
             <CardActions className="Centered">
-              <Link to="/config" state={{ vendorcode: 'VC001-A' }}><Button size="small">Select</Button></Link>
+              <Link to="/config" state={{ vendorcode: [0] }}><Button size="small">Select</Button></Link>
             </CardActions>
           </Card>
 
@@ -89,7 +91,7 @@ function Selector() {
               </Typography>
             </CardContent>
             <CardActions className="Centered">
-              <Link to="/config" state={{ vendorcode: 'VC001-B' }}><Button size="small">Select</Button></Link>
+              <Link to="/config" state={{ vendorcode: [1] }}><Button size="small">Select</Button></Link>
             </CardActions>
           </Card>
 
@@ -112,7 +114,7 @@ function Selector() {
               </Typography>
             </CardContent>
             <CardActions className="Centered">
-              <Link to="/config" state={{ vendorcode: 'VC001-C' }}><Button size="small">Select</Button></Link>
+              <Link to="/config" state={{ vendorcode: [2] }}><Button size="small">Select</Button></Link>
             </CardActions>
           </Card>
         </Box>
