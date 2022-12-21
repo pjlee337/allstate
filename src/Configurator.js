@@ -118,21 +118,21 @@ function Configurator() {
     API.post('apicca7e6a7', '/data', {
       body:{
         'vendorcode' : vendorcode,
-        // 'AllowCallbacksWhenOpen': setAllowCallbacksWhenOpen,
-        // 'AllowVoicemailAsTask': setAllowVoicemailAsTask,
-        // 'AlternatePath': setAlternatePath,
-        // 'AlternateRouting': setAlternateRouting,
-        // 'BranchLocation': setBranchLocation,
-        // 'BranchType': setBranchType,
-        // 'CallDirectorModule': setCallDirectorModule,
-        // 'ClosedGreeting': setClosedGreeting,
-        // 'ClosedModule': setClosedModule,
-        // 'DNIS': setDNIS,
-        // 'EmergencyGreetingEnabled': setEmergencyGreetingEnabled,
-        // 'EmergencyGreetingValue': setEmergencyGreetingValue,
-        // 'OpenClosedOverride': setOpenClosedOverride,
-        // 'OpenGreeting': setOpenGreeting,
-        // 'QueueARN': setQueueARN
+        'AllowCallbacksWhenOpen': setAllowCallbacksWhenOpen,
+        'AllowVoicemailAsTask': setAllowVoicemailAsTask,
+        'AlternatePath': setAlternatePath,
+        'AlternateRouting': setAlternateRouting,
+        'BranchLocation': setBranchLocation,
+        'BranchType': setBranchType,
+        'CallDirectorModule': setCallDirectorModule,
+        'ClosedGreeting': setClosedGreeting,
+        'ClosedModule': setClosedModule,
+        'DNIS': setDNIS,
+        'EmergencyGreetingEnabled': setEmergencyGreetingEnabled,
+        'EmergencyGreetingValue': setEmergencyGreetingValue,
+        'OpenClosedOverride': setOpenClosedOverride,
+        'OpenGreeting': setOpenGreeting,
+        'QueueARN': setQueueARN
       }
     }).then((response) => {
         console.log('RESPONSE' , response);
@@ -151,9 +151,8 @@ function Configurator() {
       <CssBaseline />
       <div className='Accordion-container'>
         {/* Vender Code and Subcode */}
-        <Accordion expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+        <Accordion expanded={expanded === 'panel1'}>
           <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1bh-content"
             id="panel1bh-header"
           >
@@ -169,7 +168,7 @@ function Configurator() {
               <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Vendor Code & Subcode</Typography>
             </div>
         </AccordionSummary>
-          <AccordionDetails>
+          {/* <AccordionDetails>
             <div className='update-container'>
               <Box
                 component="form"
@@ -195,7 +194,7 @@ function Configurator() {
               <Button size="small" variant="contained" onClick={updateValues} id="vendorcode">Update</Button>
 
             </div>
-          </AccordionDetails>
+          </AccordionDetails> */}
         </Accordion>
 
         {/* Branch Type */}
