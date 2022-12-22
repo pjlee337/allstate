@@ -77,21 +77,21 @@ function Configurator() {
   const [closeGreet, setClose] = React.useState('');
 
   const [vendorcode, setvendorcode] = React.useState('');
-  // const [AllowCallbacksWhenOpen, setAllowCallbacksWhenOpen] = React.useState('');
-  // const [AllowVoicemailAsTask, setAllowVoicemailAsTask] = React.useState('');
-  // const [AlternatePath, setAlternatePath] = React.useState('');
-  // const [AlternateRouting, setAlternateRouting] = React.useState('');
-  // const [BranchLocation, setBranchLocation] = React.useState('');
-  // const [BranchType, setBranchType] = React.useState('');
-  // const [CallDirectorModule, setCallDirectorModule] = React.useState('');
-  // const [ClosedGreeting, setClosedGreeting] = React.useState('');
-  // const [ClosedModule, setClosedModule] = React.useState('');
-  // const [DNIS, setDNIS] = React.useState('');
-  // const [EmergencyGreetingEnabled, setEmergencyGreetingEnabled] = React.useState('');
-  // const [EmergencyGreetingValue, setEmergencyGreetingValue] = React.useState('');
-  // const [OpenClosedOverride, setOpenClosedOverride] = React.useState('');
-  // const [OpenGreeting, setOpenGreeting] = React.useState('');
-  // const [QueueARN, setQueueARN] = React.useState('');
+  const [AllowCallbacksWhenOpen, setAllowCallbacksWhenOpen] = React.useState('');
+  const [AllowVoicemailAsTask, setAllowVoicemailAsTask] = React.useState('');
+  const [AlternatePath, setAlternatePath] = React.useState('');
+  const [AlternateRouting, setAlternateRouting] = React.useState('');
+  const [BranchLocation, setBranchLocation] = React.useState('');
+  const [BranchType, setBranchType] = React.useState('');
+  const [CallDirectorModule, setCallDirectorModule] = React.useState('');
+  const [ClosedGreeting, setClosedGreeting] = React.useState('');
+  const [ClosedModule, setClosedModule] = React.useState('');
+  const [DNIS, setDNIS] = React.useState('');
+  const [EmergencyGreetingEnabled, setEmergencyGreetingEnabled] = React.useState('');
+  const [EmergencyGreetingValue, setEmergencyGreetingValue] = React.useState('');
+  const [OpenClosedOverride, setOpenClosedOverride] = React.useState('');
+  const [OpenGreeting, setOpenGreeting] = React.useState('');
+  const [QueueARN, setQueueARN] = React.useState('');
 
 
 
