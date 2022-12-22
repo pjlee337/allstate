@@ -16,17 +16,14 @@
       "auth": {
         "allstate30078017": {}
       },
+      "storage": {
+        "dynamo566caf1f": {}
+      },
       "function": {
         "allstateb7b5c16c": {
           "deploymentBucketName": "amplify-amplifyf9947eec9bbc4-staging-200248-deployment",
           "s3Key": "amplify-builds/allstateb7b5c16c-6668586947527a487156-build.zip"
         }
-      },
-      "storage": {
-        "dynamo566caf1f": {}
-      },
-      "api": {
-        "apicca7e6a7": {}
       }
     }
   }
