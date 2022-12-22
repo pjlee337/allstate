@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom"
 import hands from './hands.svg';
 import './App.css';
@@ -13,6 +13,7 @@ import CardContent from '@mui/material/CardContent';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { API } from 'aws-amplify';
 import aws_exports from './aws-exports';
+import CardComponent from './CardComponent.js';
 
 API.configure(aws_exports);
 
@@ -27,96 +28,42 @@ function Selector() {
       }),
     [prefersDarkMode],
   );
-  const apiName = 'apicca7e6a7';
-  const path = '/data/vendorcode';
-  const myInit = {
-    headers: {}, // OPTIONAL
-    response: true, // OPTIONAL (return the entire Axios response object instead of only response.data)
-  };
-  useEffect((response) => {
-    API.get(apiName, path, myInit)
-      .then((response) => {
-        console.log(response);
 
-      })
-      .catch((error) => {
-        console.log(error.response);
+  const [megashops, setMegashops] = React.useState([]);
+
+  useEffect(() => {
+    const apiName = 'apicca7e6a7';
+    const path = '/data/vendorcode';
+    const myInit = {
+      headers: {} // OPTIONAL
+    };
+  
+    API.get(apiName, path, myInit)
+    .then((response) => {
+      console.log(response);
+      setMegashops(response);
+    });
+  }, [])
+
+
+  const renderCards = () => {
+    const elements = [];
+    
+    if (megashops && megashops.length > 0) {
+      megashops.forEach(megashop => {
+        elements.push(<CardComponent key={megashop.vendorcode} {...megashop }/>)
       });
-  })
+    }
+
+    return elements;
+  }
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box sx={{ flexGrow: 1 }} className='App'>
         <Box sx={{ flexGrow: 1 }} className='App-body'>
-          <Card sx={{ minWidth: 275 }} className="Megashop">
-            <CardContent>
-              <img src={hands} className="Hands-logo" alt="hands" />
-              <Typography variant="h5" component="div">
-                <br />
-                Megashop
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Dataset 1
-              </Typography>
-              <Typography variant="body2">
-                Select this option to
-                <br />
-                configure your parameters
-                <br />
-                for Megashop A
-              </Typography>
-            </CardContent>
-            <CardActions className="Centered">
-              <Link to="/config" state={{ vendorcode: [0] }}><Button size="small">Select</Button></Link>
-            </CardActions>
-          </Card>
-
-          <Card sx={{ minWidth: 275 }} className="Megashop">
-            <CardContent>
-              <img src={hands} className="Hands-logo" alt="hands" />
-              <Typography variant="h5" component="div">
-                <br />
-                Megashop
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Dataset 2
-              </Typography>
-              <Typography variant="body2">
-                Select this option to
-                <br />
-                configure your parameters
-                <br />
-                for Megashop B
-              </Typography>
-            </CardContent>
-            <CardActions className="Centered">
-              <Link to="/config" state={{ vendorcode: [1] }}><Button size="small">Select</Button></Link>
-            </CardActions>
-          </Card>
-
-          <Card sx={{ minWidth: 275 }} className="Megashop">
-            <CardContent>
-              <img src={hands} className="Hands-logo" alt="hands" />
-              <Typography variant="h5" component="div">
-                <br />
-                Megashop
-              </Typography>
-              <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                Dataset 3
-              </Typography>
-              <Typography variant="body2">
-                Select this option to
-                <br />
-                configure your parameters
-                <br />
-                for Megashop C
-              </Typography>
-            </CardContent>
-            <CardActions className="Centered">
-              <Link to="/config" state={{ vendorcode: [2] }}><Button size="small">Select</Button></Link>
-            </CardActions>
-          </Card>
+          {renderCards()}
         </Box>
       </Box>
     </ThemeProvider>

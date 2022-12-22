@@ -72,67 +72,74 @@ function Configurator() {
       }),
     [prefersDarkMode],
   );
-  const [expanded, setExpanded] = React.useState(false);
-  const [openGreet, setOpen] = React.useState('');
-  const [closeGreet, setClose] = React.useState('');
 
-  const [vendorcode, setvendorcode] = React.useState('');
-  const [AllowCallbacksWhenOpen, setAllowCallbacksWhenOpen] = React.useState('');
-  const [AllowVoicemailAsTask, setAllowVoicemailAsTask] = React.useState('');
-  const [AlternatePath, setAlternatePath] = React.useState('');
-  const [AlternateRouting, setAlternateRouting] = React.useState('');
-  const [BranchLocation, setBranchLocation] = React.useState('');
-  const [BranchType, setBranchType] = React.useState('');
-  const [CallDirectorModule, setCallDirectorModule] = React.useState('');
-  const [ClosedGreeting, setClosedGreeting] = React.useState('');
-  const [ClosedModule, setClosedModule] = React.useState('');
-  const [DNIS, setDNIS] = React.useState('');
-  const [EmergencyGreetingEnabled, setEmergencyGreetingEnabled] = React.useState('');
-  const [EmergencyGreetingValue, setEmergencyGreetingValue] = React.useState('');
-  const [OpenClosedOverride, setOpenClosedOverride] = React.useState('');
-  const [OpenGreeting, setOpenGreeting] = React.useState('');
-  const [QueueARN, setQueueARN] = React.useState('');
+  const location = useLocation();
+  const { megashop } = location.state;
+  
+  console.log(megashop);
+
+  
+
+  const [expanded, setExpanded] = React.useState(false);
+  // const [openGreet, setOpen] = React.useState('');
+  // const [closeGreet, setClose] = React.useState('');
+  const [checked, setGreetingChecked, setEmergencyChecked] = useState(false);
+
+  const [vendorcode, setvendorcode] = React.useState(megashop.vendorcode);
+  const [AllowCallbacksWhenOpen, setAllowCallbacksWhenOpen] = React.useState(megashop.AllowCallbacksWhenOpen);
+  const [AllowVoicemailAsTask, setAllowVoicemailAsTask] = React.useState(megashop.AllowVoicemailAsTask);
+  const [AlternatePath, setAlternatePath] = React.useState(megashop.AlternatePath);
+  const [AlternateRouting, setAlternateRouting] = React.useState(megashop.AlternateRouting);
+  const [BranchLocation, setBranchLocation] = React.useState(megashop.BranchLocation);
+  const [BranchType, setBranchType] = React.useState(megashop.BranchType);
+  const [CallDirectorModule, setCallDirectorModule] = React.useState(megashop.CallDirectorModule);
+  const [ClosedGreeting, setClosedGreeting] = React.useState(megashop.ClosedGreeting);
+  const [ClosedModule, setClosedModule] = React.useState(megashop.ClosedModule);
+  const [DNIS, setDNIS] = React.useState(megashop.DNIS);
+  const [EmergencyGreetingEnabled, setEmergencyGreetingEnabled] = React.useState(megashop.EmergencyGreetingEnabled);
+  const [EmergencyGreetingValue, setEmergencyGreetingValue] = React.useState(megashop.EmergencyGreetingValue);
+  const [OpenClosedOverride, setOpenClosedOverride] = React.useState(megashop.OpenClosedOverride);
+  const [OpenGreeting, setOpenGreeting] = React.useState(megashop.OpenGreeting);
+  const [QueueARN, setQueueARN] = React.useState(megashop.QueueARN);
 
 
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  const handleOpenChange = (event) => {
-    setOpen(event.target.value);
-  };
-  const handleCloseChange = (event) => {
-    setClose(event.target.value);
-  };
-  const [checked, setGreetingChecked, setEmergencyChecked] = useState(false);
+  // const handleOpenChange = (event) => {
+  //   setOpen(event.target.value);
+  // };
+  // const handleCloseChange = (event) => {
+  //   setClose(event.target.value);
+  // };
   const onGreetingClick = (event) => {
     event.stopPropagation();
-    setGreetingChecked(event.target.checked);
+    setOpenClosedOverride('event.target.checked');
   }
   const onEmergencyClick = (event) => {
     event.stopPropagation();
-    setEmergencyChecked(event.target.checked);
+    setEmergencyGreetingEnabled(event.target.checked);
   }
   const updateValues = (event) => {
-    console.log('EVENT TARGET LOG' , event.target);
-    API.post('apicca7e6a7', '/data', {
+    API.put('apicca7e6a7', '/data', {
       body:{
         'vendorcode' : vendorcode,
-        'AllowCallbacksWhenOpen': setAllowCallbacksWhenOpen,
-        'AllowVoicemailAsTask': setAllowVoicemailAsTask,
-        'AlternatePath': setAlternatePath,
-        'AlternateRouting': setAlternateRouting,
-        'BranchLocation': setBranchLocation,
-        'BranchType': setBranchType,
-        'CallDirectorModule': setCallDirectorModule,
-        'ClosedGreeting': setClosedGreeting,
-        'ClosedModule': setClosedModule,
-        'DNIS': setDNIS,
-        'EmergencyGreetingEnabled': setEmergencyGreetingEnabled,
-        'EmergencyGreetingValue': setEmergencyGreetingValue,
-        'OpenClosedOverride': setOpenClosedOverride,
-        'OpenGreeting': setOpenGreeting,
-        'QueueARN': setQueueARN
+        'AllowCallbacksWhenOpen': AllowCallbacksWhenOpen,
+        'AllowVoicemailAsTask': AllowVoicemailAsTask,
+        'AlternatePath': AlternatePath,
+        'AlternateRouting': AlternateRouting,
+        'BranchLocation': BranchLocation,
+        'BranchType': BranchType,
+        'CallDirectorModule': CallDirectorModule,
+        'ClosedGreeting': ClosedGreeting,
+        'ClosedModule': ClosedModule,
+        'DNIS': DNIS,
+        'EmergencyGreetingEnabled': EmergencyGreetingEnabled,
+        'EmergencyGreetingValue': EmergencyGreetingValue,
+        'OpenClosedOverride': OpenClosedOverride,
+        'OpenGreeting': OpenGreeting,
+        'QueueARN': QueueARN
       }
     }).then((response) => {
         console.log('RESPONSE' , response);
@@ -141,10 +148,6 @@ function Configurator() {
         console.log(error.response);
       });
   };
-
-  const location = useLocation();
-  const { id } = location.state;
-  console.log(id);
 
   return (
     <ThemeProvider theme={theme}>
@@ -168,33 +171,6 @@ function Configurator() {
               <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Vendor Code & Subcode</Typography>
             </div>
         </AccordionSummary>
-          {/* <AccordionDetails>
-            <div className='update-container'>
-              <Box
-                component="form"
-                sx={{
-                  '& .MuiTextField-root': { m: 0, width: '100%' },
-                }}
-                noValidate
-                autoComplete="off"
-              >
-                <TextField
-                  id="outlined-multiline-flexible"
-                  label="Vendor Code"
-                  multiline
-                  maxRows={4}
-                  // onChange={(e) => {
-                  //   setVendorcode(e.target.value);
-                  // }}
-                  // value={vendorcode}
-                />
-              </Box>
-
-              <br />
-              <Button size="small" variant="contained" onClick={updateValues} id="vendorcode">Update</Button>
-
-            </div>
-          </AccordionDetails> */}
         </Accordion>
 
         {/* Branch Type */}
@@ -210,7 +186,7 @@ function Configurator() {
                   <Badge color="secondary" variant="dot"></Badge>
                 </div>
                 <Typography className="col-1" sx={{ width: '33%', flexShrink: 0 }}>
-                  Mega Shop A
+                  {BranchType}
                 </Typography>
               </div>
               <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Branch Type</Typography>
@@ -231,11 +207,15 @@ function Configurator() {
                   label="Branch Type"
                   multiline
                   maxRows={4}
+                  value={BranchType}
+                  onChange={(e) => {
+                    setBranchType(e.target.value)
+                  }}
                 />
               </Box>
 
               <br />
-              <Button size="small" variant="contained">Update</Button>
+              <Button size="small" variant="contained" onClick={updateValues}>Update</Button>
 
             </div>
           </AccordionDetails>
@@ -254,7 +234,7 @@ function Configurator() {
                   <Badge color="secondary" variant="dot"></Badge>
                 </div>
                 <Typography className="col-1" sx={{ width: '33%', flexShrink: 0 }}>
-                  555-555-1212
+                  {DNIS}
                 </Typography>
               </div>
               <Typography className="ml-15" sx={{ color: 'text.secondary' }}>DNIS - Connected</Typography>
@@ -275,11 +255,15 @@ function Configurator() {
                   label="DNIS - Connected"
                   multiline
                   maxRows={4}
+                  value={DNIS}
+                  onChange={(e) => {
+                    setDNIS(e.target.value)
+                  }}
                 />
               </Box>
 
               <br />
-              <Button size="small" variant="contained">Update</Button>
+              <Button size="small" variant="contained" onClick={updateValues}>Update</Button>
 
             </div>
           </AccordionDetails>
@@ -298,7 +282,7 @@ function Configurator() {
                   <Badge color="secondary" variant="dot"></Badge>
                 </div>
                 <Typography className="col-1" sx={{ width: '33%', flexShrink: 0 }}>
-                  456 Center Street, Anywhere, MT 59001
+                  {BranchLocation}
                 </Typography>
               </div>
               <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Branch Location</Typography>
@@ -319,11 +303,15 @@ function Configurator() {
                   label="Address"
                   multiline
                   maxRows={4}
+                  value={BranchLocation}
+                  onChange={(e) => {
+                    setBranchLocation(e.target.value)
+                  }}
                 />
               </Box>
 
               <br />
-              <Button size="small" variant="contained">Update</Button>
+              <Button size="small" variant="contained" onClick={updateValues}>Update</Button>
 
             </div>
           </AccordionDetails>
@@ -333,8 +321,8 @@ function Configurator() {
         <Accordion expanded={expanded === 'panel5'} onChange={handleChange('panel5')}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"
+            aria-controls="panel5bh-content"
+            id="panel5bh-header"
           >
             <div className="space-between">
               <div className='col-1'>
@@ -364,21 +352,25 @@ function Configurator() {
                 <TextField
                   id="outlined-name"
                   label="Open Greeting"
-                  value={openGreet}
-                  onChange={handleOpenChange}
                   multiline
                   rows={4}
+                  value={OpenGreeting}
+                  onChange={(e) => {
+                    setOpenGreeting(e.target.value)
+                  }}
                 />
                 <TextField
                   id="outlined-uncontrolled"
                   label="Close Greeting"
-                  value={closeGreet}
-                  onChange={handleCloseChange}
                   multiline
                   rows={4}
+                  value={ClosedGreeting}
+                  onChange={(e) => {
+                    setClosedGreeting(e.target.value)
+                  }}
                 />
               </Box>
-              <Button size="small" variant="contained">Update</Button>
+              <Button size="small" variant="contained" onClick={updateValues}>Update</Button>
             </div>
           </AccordionDetails>
         </Accordion>
@@ -387,8 +379,8 @@ function Configurator() {
         <Accordion expanded={expanded === 'panel6'} onChange={handleChange('panel6')}>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"
+            aria-controls="panel6bh-content"
+            id="panel6bh-header"
           >
             <div className="space-between">
               <div className='col-1'>
@@ -418,45 +410,19 @@ function Configurator() {
                 <TextField
                   id="outlined-uncontrolled"
                   label="Emergency Greeting"
-                  value={closeGreet}
-                  onChange={handleCloseChange}
+                  // onChange={handleCloseChange}
                   multiline
                   rows={4}
+                  value={EmergencyGreetingValue}
+                  onChange={(e) => {
+                    setEmergencyGreetingValue(e.target.value)
+                  }}
                 />
               </Box>
-              <Button size="small" variant="contained">Update</Button>
+              <Button size="small" variant="contained" onClick={updateValues}>Update</Button>
             </div>
           </AccordionDetails>
         </Accordion>
-
-        {/* Alternate Routing */}
-        {/* <Accordion expanded={expanded === 'panel7'} onChange={handleChange('panel7')}>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1bh-content"
-            id="panel1bh-header"
-          >
-            <div className="space-between">
-              <div className='col-1'>
-                <div className='values'>
-                  <FormGroup>
-                    <Stack direction="row" spacing={1} alignItems="center">
-                      <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />
-                    </Stack>
-                  </FormGroup>
-                </div>
-              </div>
-              <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Alternate Routing</Typography>
-            </div>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-              Aliquam eget maximus est, id dignissim quam.
-            </Typography>
-          </AccordionDetails>
-        </Accordion> */}
-
 
       </div>
     </ThemeProvider>
