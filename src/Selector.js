@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from "react-router-dom"
-import hands from './hands.svg';
 import './App.css';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { API } from 'aws-amplify';
 import aws_exports from './aws-exports';

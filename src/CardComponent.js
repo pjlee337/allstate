@@ -30,7 +30,7 @@ const CardComponent = (megashop) => {
             </Typography>
         </CardContent>
         <CardActions className="Centered">
-            <Link to="/config" state={{ megashop: megashop }} ><Button size="small">Select</Button></Link>
+            <Link to="/config" state={{ incomingVendorcode: megashop.vendorcode, incomingMegashop: megashop }}><Button size="small">Select</Button></Link>
         </CardActions>
     </Card>
     )

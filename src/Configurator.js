@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -74,54 +74,70 @@ function Configurator() {
   );
 
   const location = useLocation();
-  const { megashop } = location.state;
-  
-  console.log(megashop);
+  const { incomingVendorcode, incomingMegashop } = location.state;
+  const [currentMegashop, setCurrentMegashop] = React.useState(incomingMegashop);
 
+  useEffect(() => {
+    const apiName = 'apicca7e6a7';
+    const path = '/data/vendorcode';
+    const myInit = {
+      headers: {} // OPTIONAL
+    };
   
+    API.get(apiName, path, myInit)
+    .then((response) => {
+      console.log(response);
+      const targetMegashop = response.filter((megashop) => {
+        return incomingVendorcode === megashop.vendorcode;
+      })[0]
+      setCurrentMegashop(targetMegashop);
+    });
+  }, [])
 
   const [expanded, setExpanded] = React.useState(false);
   // const [openGreet, setOpen] = React.useState('');
   // const [closeGreet, setClose] = React.useState('');
   const [checked, setGreetingChecked, setEmergencyChecked] = useState(false);
 
-  const [vendorcode, setvendorcode] = React.useState(megashop.vendorcode);
-  const [AllowCallbacksWhenOpen, setAllowCallbacksWhenOpen] = React.useState(megashop.AllowCallbacksWhenOpen);
-  const [AllowVoicemailAsTask, setAllowVoicemailAsTask] = React.useState(megashop.AllowVoicemailAsTask);
-  const [AlternatePath, setAlternatePath] = React.useState(megashop.AlternatePath);
-  const [AlternateRouting, setAlternateRouting] = React.useState(megashop.AlternateRouting);
-  const [BranchLocation, setBranchLocation] = React.useState(megashop.BranchLocation);
-  const [BranchType, setBranchType] = React.useState(megashop.BranchType);
-  const [CallDirectorModule, setCallDirectorModule] = React.useState(megashop.CallDirectorModule);
-  const [ClosedGreeting, setClosedGreeting] = React.useState(megashop.ClosedGreeting);
-  const [ClosedModule, setClosedModule] = React.useState(megashop.ClosedModule);
-  const [DNIS, setDNIS] = React.useState(megashop.DNIS);
-  const [EmergencyGreetingEnabled, setEmergencyGreetingEnabled] = React.useState(megashop.EmergencyGreetingEnabled);
-  const [EmergencyGreetingValue, setEmergencyGreetingValue] = React.useState(megashop.EmergencyGreetingValue);
-  const [OpenClosedOverride, setOpenClosedOverride] = React.useState(megashop.OpenClosedOverride);
-  const [OpenGreeting, setOpenGreeting] = React.useState(megashop.OpenGreeting);
-  const [QueueARN, setQueueARN] = React.useState(megashop.QueueARN);
+  const [vendorcode, setvendorcode] = React.useState(currentMegashop.vendorcode);
+  const [AllowCallbacksWhenOpen, setAllowCallbacksWhenOpen] = React.useState(currentMegashop.AllowCallbacksWhenOpen);
+  const [AllowVoicemailAsTask, setAllowVoicemailAsTask] = React.useState(currentMegashop.AllowVoicemailAsTask);
+  const [AlternatePath, setAlternatePath] = React.useState(currentMegashop.AlternatePath);
+  const [AlternateRouting, setAlternateRouting] = React.useState(currentMegashop.AlternateRouting);
+  const [BranchLocation, setBranchLocation] = React.useState(currentMegashop.BranchLocation);
+  const [BranchType, setBranchType] = React.useState(currentMegashop.BranchType);
+  const [CallDirectorModule, setCallDirectorModule] = React.useState(currentMegashop.CallDirectorModule);
+  const [ClosedGreeting, setClosedGreeting] = React.useState(currentMegashop.ClosedGreeting);
+  const [ClosedModule, setClosedModule] = React.useState(currentMegashop.ClosedModule);
+  const [DNIS, setDNIS] = React.useState(currentMegashop.DNIS);
+  const [EmergencyGreetingEnabled, setEmergencyGreetingEnabled] = React.useState(currentMegashop.EmergencyGreetingEnabled);
+  const [EmergencyGreetingValue, setEmergencyGreetingValue] = React.useState(currentMegashop.EmergencyGreetingValue);
+  const [OpenClosedOverride, setOpenClosedOverride] = React.useState(currentMegashop.OpenClosedOverride);
+  const [OpenGreeting, setOpenGreeting] = React.useState(currentMegashop.OpenGreeting);
+  const [QueueARN, setQueueARN] = React.useState(currentMegashop.QueueARN);
 
 
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-  // const handleOpenChange = (event) => {
-  //   setOpen(event.target.value);
-  // };
-  // const handleCloseChange = (event) => {
-  //   setClose(event.target.value);
-  // };
+
   const onGreetingClick = (event) => {
+    console.log('EVENT', event.target.checked);
     event.stopPropagation();
-    setOpenClosedOverride('event.target.checked');
+    setOpenClosedOverride(event.target.checked);
   }
   const onEmergencyClick = (event) => {
     event.stopPropagation();
     setEmergencyGreetingEnabled(event.target.checked);
   }
-  const updateValues = (event) => {
+  useEffect(() => {
+    updateValues();
+  }, [OpenClosedOverride, EmergencyGreetingEnabled])
+
+
+
+  const updateValues = () => {
     API.put('apicca7e6a7', '/data', {
       body:{
         'vendorcode' : vendorcode,
@@ -143,6 +159,7 @@ function Configurator() {
       }
     }).then((response) => {
         console.log('RESPONSE' , response);
+        setCurrentMegashop(response.data);
       })
       .catch((error) => {
         console.log(error.response);
@@ -329,11 +346,17 @@ function Configurator() {
                 <div className='values'>
                   <FormGroup>
                     <Stack direction="row" spacing={1} alignItems="center">
-                      <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onClick={onGreetingClick} />
+                      <AntSwitch 
+                        defaultChecked={currentMegashop.OpenClosedOverride} 
+                        inputProps={{ 'aria-label': 'ant design' }} 
+                        onClick={onGreetingClick} 
+                      />
                     </Stack>
                   </FormGroup>
                 </div>
-                <Typography className="col-1" sx={{ width: '33%', flexShrink: 0 }}>Open / Close Override</Typography>
+                <Typography className="col-1" sx={{ width: '33%', flexShrink: 0 }}>
+                  {EmergencyGreetingEnabled ? 'Enabled' : 'Disabled'}
+                </Typography>
               </div>
               <Typography className="ml-15" sx={{ color: 'text.secondary' }}>Greeting</Typography>
             </div>
@@ -387,7 +410,11 @@ function Configurator() {
                 <div className='values'>
                   <FormGroup>
                     <Stack direction="row" spacing={1} alignItems="center">
-                      <AntSwitch inputProps={{ 'aria-label': 'ant design' }} onClick={onEmergencyClick} />
+                      <AntSwitch                       
+                        defaultChecked={currentMegashop.EmergencyGreetingEnabled} 
+                        inputProps={{ 'aria-label': 'ant design' }} 
+                        onClick={onEmergencyClick}
+                      />
                     </Stack>
                   </FormGroup>
                 </div>
