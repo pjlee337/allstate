@@ -9,7 +9,7 @@
       }
     },
     "/data": {
-      "name": "/data/vendorcode",
+      "name": "/data",
       "lambdaFunction": "allstateb7b5c16c",
       "permissions": {
         "setting": "private",
