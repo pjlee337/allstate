@@ -138,7 +138,7 @@ function Configurator() {
 
 
   const updateValues = () => {
-    API.put('apicca7e6a7', '/data', {
+    API.put('apicca7e6a7', '/data/vendorcode', {
       body:{
         'vendorcode' : vendorcode,
         'AllowCallbacksWhenOpen': AllowCallbacksWhenOpen,
